@@ -27,6 +27,10 @@ form {
   font-family: "Sorrow", monospace;
   text-align: center;
 }
+a.githubLink {
+  font-family: monospace;
+  font-size: 30px;
+}
 img.stickman1 {
   width: 70px;
   position: relative;
