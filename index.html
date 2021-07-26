@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="img/stickmen.png"
+        class="stickmen"
+        alt="stickmen sharing an umbrella"
+      />
+      <button>Current Location</button>
+      <form class="searchForm" id="search-form">
+        <input
+          type="search"
+          placeholder="Search for your city"
+          autofocus="on"
+          autocomplete="off"
+          size="50"
+          id="city-input"
+        />
+        <input type="submit" value="Search" class="formSubmit" />
+      </form>
+      <img src="img/Stickman1.png" class="stickman1" alt="sitting in the sun" />
+      <img
+        src="img/stickman3.png"
+        class="windyDay"
+        alt="hat blowing away in the wind"
+      />
+      <div class="row">
+        <div class="mainCity col-5">
+          <h1 class="phx" id="main-city-day">Loading</h1>
+          <h2 class="phx" id="main-day-time">Sunday 11:00 PM</h2>
+          <img src="img/loading.png" class="sunWClouds" alt="periodic clouds" />
+          <p class="phx">
+            <span class="temp"
+              ><span id="main-day-temp">...</span
+              ><a href="#" id="main-day-temp-f">F</a> /
+              <a href="#" id="main-day-temp-c">C</a>
+            </span>
+            <br />
+            <span class="weather" id="main-day-weather"> Loading... </span>
+          </p>
+        </div>
+        <div class="ect col-6">
+          <h1 class="other">Cities Near You</h1>
+          <p class="other" id="city-one">
+            Loading...<span class="other" id="temp-one"> ?°F</span>
+            <br />
+            Loading... <span class="other"> ?°F</span>
+            <br />
+            Loading...<span class="other"> ?°F</span>
+            <br />
+            Loading...<span class="other"> ?°F</span>
+            <br />
+            Loading... <span class="other"> ?°F</span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="monday col-3">
+          <h1 class="otherDays" id="day-one">Monday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+        <div class="tuesday col-3">
+          <h1 class="otherDays" id="day-two">Tuesday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="wednesday col-3">
+          <h1 class="otherDays" id="day-three">Wednesday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+        <div class="thursday col-3">
+          <h1 class="otherDays" id="day-four">Thursday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="friday col-3">
+          <h1 class="otherDays" id="day-five">Friday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+        <div class="saturday col-3">
+          <h1 class="otherDays" id="day-six">Saturday</h1>
+          <img
+            src="img/loading.png"
+            class="partiallyCloudy"
+            alt="partially cloudy"
+          />
+          <p class="otherDays">
+            <span class="temp"> ?°F </span>
+            <br />
+            <span class="weather"> Loading... </span>
+          </p>
+        </div>
+      </div>
+      <img
+        src="img/stickman4.png"
+        class="standingInRain"
+        alt="standing in rain"
+      />
+    </div>
+    <script src="java/code.js"></script>
+  </body>
+</html>
