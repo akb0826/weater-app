@@ -52,7 +52,6 @@ function sayCity(event) {
   axios.get(cityLink).then(sayTemp);
 }
 function sayTemp(response) {
-  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let weather = response.data.weather[0].description;
   let mainIcon = document.querySelector("#main-day-icon");
