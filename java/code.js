@@ -10,8 +10,8 @@ let weekdays = [
 ];
 let hour = now.getHours();
 let minute = now.getMinutes();
-if (minute > 10) {
-  let minute = `0${minute}`;
+if (minute < 10) {
+  minute = `0${minute}`;
 }
 let weekday = weekdays[now.getDay()];
 let date = `Last Updated: ${weekday} ${hour}:${minute}`;
