@@ -37,6 +37,7 @@ let button = document.querySelector("button");
 let mainCity = document.querySelector("#main-city-day");
 let mainTemp = document.querySelector("#main-day-temp");
 let mainWeather = document.querySelector("#main-day-weather");
+
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
 };
@@ -51,16 +52,20 @@ function sayCity(event) {
   axios.get(cityLink).then(sayTemp);
 }
 function sayTemp(response) {
+  console.log(response.data);
   let temperature = Math.round(response.data.main.temp);
   let weather = response.data.weather[0].description;
+  let mainIcon = document.querySelector("#main-day-icon");
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
+  mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
 }
 function sayLocation(response) {
-  console.log(response);
   mainCity.innerHTML = response.data.name;
   let locationTemp = Math.round(response.data.main.temp);
   let locationWeather = response.data.weather[0].description;
+  let mainIcon = document.querySelector("#main-day-icon");
+  mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
   mainTemp.innerHTML = `${locationTemp}°`;
   mainWeather.innerHTML = `${locationWeather}`;
 }
