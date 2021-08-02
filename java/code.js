@@ -52,21 +52,26 @@ function sayCity(event) {
   axios.get(cityLink).then(sayTemp);
 }
 function sayTemp(response) {
-  let temperature = Math.round(response.data.main.temp);
+  fahrenheitTemp = response.data.main.temp;
+  let temperature = Math.round(fahrenheitTemp);
   let weather = response.data.weather[0].description;
   let mainIcon = document.querySelector("#main-day-icon");
+
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
+  celciusButton.classList.remove("active");
 }
 function sayLocation(response) {
+  fahrenheitTemp = response.data.main.temp;
   mainCity.innerHTML = response.data.name;
-  let locationTemp = Math.round(response.data.main.temp);
+  let locationTemp = Math.round(fahrenheitTemp);
   let locationWeather = response.data.weather[0].description;
   let mainIcon = document.querySelector("#main-day-icon");
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
   mainTemp.innerHTML = `${locationTemp}°`;
   mainWeather.innerHTML = `${locationWeather}`;
+  celciusButton.classList.remove("active");
 }
 function handleLocation(position) {
   let latitude = position.coords.latitude;
@@ -77,5 +82,34 @@ function handleLocation(position) {
 function getLocation() {
   navigator.geolocation.getCurrentPosition(handleLocation);
 }
+function sayCelciusTemp(event) {
+  event.preventDefault();
+  let celciusTemp = (fahrenheitTemp - 32) * (5 / 9);
+  let temperatureElement = document.querySelector("#main-day-temp");
+  if (fahrenheitTemp == null) {
+    temperatureElement.innerHTML = "...";
+  } else {
+    temperatureElement.innerHTML = Math.round(celciusTemp) + "°";
+    fahrenheitButton.classList.remove("active");
+    celciusButton.classList.add("active");
+  }
+}
+function sayFahrenheitTemp(event) {
+  let temperatureElement = document.querySelector("#main-day-temp");
+  if (fahrenheitTemp == null) {
+    temperatureElement.innerHTML = "...";
+  } else {
+    temperatureElement.innerHTML = Math.round(fahrenheitTemp) + "°";
+    celciusButton.classList.remove("active");
+    fahrenheitButton.classList.add("active");
+  }
+}
 button.addEventListener("click", getLocation);
 citySearch.addEventListener("submit", sayCity);
+
+let fahrenheitTemp = null;
+
+let celciusButton = document.querySelector("#main-day-temp-c");
+celciusButton.addEventListener("click", sayCelciusTemp);
+let fahrenheitButton = document.querySelector("#main-day-temp-f");
+fahrenheitButton.addEventListener("click", sayFahrenheitTemp);
