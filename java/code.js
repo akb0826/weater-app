@@ -59,12 +59,14 @@ function sayTemp(response) {
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=imperial`;
+  let apiLink = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`;
 
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
   celciusButton.classList.remove("active");
   axios.get(cityCircleLink).then(nearCities);
+  axios.get(apiLink).then(getForecast);
 }
 function nearCities(response) {
   let cityOne = document.querySelector("#city-one");
@@ -90,6 +92,9 @@ function nearCities(response) {
   tempFour.innerHTML = Math.round(response.data.list[5].main.temp) + "°F";
   tempFive.innerHTML = Math.round(response.data.list[6].main.temp) + "°F";
 }
+function getForecast(response) {
+  console.log(response.data.daily);
+}
 function sayLocation(response) {
   fahrenheitTemp = response.data.main.temp;
   mainCity.innerHTML = response.data.name;
@@ -108,6 +113,8 @@ function handleLocation(position) {
   axios.get(coordLink).then(sayLocation);
   let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${latitude}&lon=${longitude}&cnt=7&appid=${apiKey}&units=imperial`;
   axios.get(cityCircleLink).then(nearCities);
+  let apiLink = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
+  axios.get(apiLink).then(getForecast);
 }
 function getLocation() {
   navigator.geolocation.getCurrentPosition(handleLocation);
