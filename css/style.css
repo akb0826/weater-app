@@ -82,6 +82,11 @@ p.other {
   margin-bottom: 0px;
   padding-bottom: 0px;
 }
+h2.disclaimer {
+  font-family: "Sorrow", monospace;
+  font-size: 20px;
+  text-align: center;
+}
 div.monday {
   border: solid #e2f0cb;
   margin-left: 70px;

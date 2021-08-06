@@ -56,9 +56,9 @@ function sayTemp(response) {
   let temperature = Math.round(fahrenheitTemp);
   let weather = response.data.weather[0].description;
   let mainIcon = document.querySelector("#main-day-icon");
-  let lat = Math.round(response.data.coord.lat);
-  let lon = Math.round(response.data.coord.lon);
-  let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=5&appid=${apiKey}&units=imperial`;
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=7&appid=${apiKey}&units=imperial`;
 
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
@@ -78,17 +78,17 @@ function nearCities(response) {
   let cityFive = document.querySelector("#city-five");
   let tempFive = document.querySelector("#temp-five");
 
-  cityOne.innerHTML = response.data.list[0].name + " ";
-  cityTwo.innerHTML = response.data.list[1].name + " ";
-  cityThree.innerHTML = response.data.list[2].name + " ";
-  cityFour.innerHTML = response.data.list[3].name + " ";
-  cityFive.innerHTML = response.data.list[4].name + " ";
+  cityOne.innerHTML = response.data.list[2].name + " ";
+  cityTwo.innerHTML = response.data.list[3].name + " ";
+  cityThree.innerHTML = response.data.list[4].name + " ";
+  cityFour.innerHTML = response.data.list[5].name + " ";
+  cityFive.innerHTML = response.data.list[6].name + " ";
 
-  tempOne.innerHTML = Math.round(response.data.list[0].main.temp) + "°F";
-  tempTwo.innerHTML = Math.round(response.data.list[1].main.temp) + "°F";
-  tempThree.innerHTML = Math.round(response.data.list[2].main.temp) + "°F";
-  tempFour.innerHTML = Math.round(response.data.list[3].main.temp) + "°F";
-  tempFive.innerHTML = Math.round(response.data.list[4].main.temp) + "°F";
+  tempOne.innerHTML = Math.round(response.data.list[2].main.temp) + "°F";
+  tempTwo.innerHTML = Math.round(response.data.list[3].main.temp) + "°F";
+  tempThree.innerHTML = Math.round(response.data.list[4].main.temp) + "°F";
+  tempFour.innerHTML = Math.round(response.data.list[5].main.temp) + "°F";
+  tempFive.innerHTML = Math.round(response.data.list[6].main.temp) + "°F";
 }
 function sayLocation(response) {
   fahrenheitTemp = response.data.main.temp;
@@ -106,6 +106,8 @@ function handleLocation(position) {
   let longitude = position.coords.longitude;
   let coordLink = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`;
   axios.get(coordLink).then(sayLocation);
+  let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${latitude}&lon=${longitude}&cnt=7&appid=${apiKey}&units=imperial`;
+  axios.get(cityCircleLink).then(nearCities);
 }
 function getLocation() {
   navigator.geolocation.getCurrentPosition(handleLocation);
