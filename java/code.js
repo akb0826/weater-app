@@ -56,11 +56,18 @@ function sayTemp(response) {
   let temperature = Math.round(fahrenheitTemp);
   let weather = response.data.weather[0].description;
   let mainIcon = document.querySelector("#main-day-icon");
+  let lat = Math.round(response.data.coord.lat);
+  let lon = Math.round(response.data.coord.lon);
+  let cityCircleLink = `https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=5&appid=${apiKey}&units=imperial`;
 
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
   celciusButton.classList.remove("active");
+  axios.get(cityCircleLink).then(nearCities);
+}
+function nearCities(response) {
+  console.log(response.data);
 }
 function sayLocation(response) {
   fahrenheitTemp = response.data.main.temp;
