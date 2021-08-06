@@ -67,7 +67,28 @@ function sayTemp(response) {
   axios.get(cityCircleLink).then(nearCities);
 }
 function nearCities(response) {
-  console.log(response.data);
+  let cityOne = document.querySelector("#city-one");
+  let tempOne = document.querySelector("#temp-one");
+  let cityTwo = document.querySelector("#city-two");
+  let tempTwo = document.querySelector("#temp-two");
+  let cityThree = document.querySelector("#city-three");
+  let tempThree = document.querySelector("#temp-three");
+  let cityFour = document.querySelector("#city-four");
+  let tempFour = document.querySelector("#temp-four");
+  let cityFive = document.querySelector("#city-five");
+  let tempFive = document.querySelector("#temp-five");
+
+  cityOne.innerHTML = response.data.list[0].name + " ";
+  cityTwo.innerHTML = response.data.list[1].name + " ";
+  cityThree.innerHTML = response.data.list[2].name + " ";
+  cityFour.innerHTML = response.data.list[3].name + " ";
+  cityFive.innerHTML = response.data.list[4].name + " ";
+
+  tempOne.innerHTML = Math.round(response.data.list[0].main.temp) + "°F";
+  tempTwo.innerHTML = Math.round(response.data.list[1].main.temp) + "°F";
+  tempThree.innerHTML = Math.round(response.data.list[2].main.temp) + "°F";
+  tempFour.innerHTML = Math.round(response.data.list[3].main.temp) + "°F";
+  tempFive.innerHTML = Math.round(response.data.list[4].main.temp) + "°F";
 }
 function sayLocation(response) {
   fahrenheitTemp = response.data.main.temp;
