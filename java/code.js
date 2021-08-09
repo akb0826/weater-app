@@ -25,6 +25,7 @@ let button = document.querySelector("button");
 let mainCity = document.querySelector("#main-city-day");
 let mainTemp = document.querySelector("#main-day-temp");
 let mainWeather = document.querySelector("#main-day-weather");
+let windSpeed = document.querySelector("#wind-speed");
 
 String.prototype.capitalize = function () {
   return this.charAt(0).toUpperCase() + this.slice(1);
@@ -40,6 +41,7 @@ function sayCity(event) {
   axios.get(cityLink).then(sayTemp);
 }
 function sayTemp(response) {
+  console.log(response.data);
   fahrenheitTemp = response.data.main.temp;
   let temperature = Math.round(fahrenheitTemp);
   let weather = response.data.weather[0].description;
@@ -51,8 +53,10 @@ function sayTemp(response) {
 
   mainTemp.innerHTML = `${temperature}°`;
   mainWeather.innerHTML = `${weather}`;
+  windSpeed.innerHTML = `Wind Speed : ${Math.round(
+    response.data.wind.speed
+  )} mph`;
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
-  celciusButton.classList.remove("active");
   axios.get(cityCircleLink).then(nearCities);
   axios.get(apiLink).then(getForecast);
 }
@@ -86,26 +90,11 @@ function getForecast(response) {
   let forecastHTML = `<div class="row">
           <div class="monday col-3">
             <h1 class="otherDaysName" id="day-one">${formatDay(
-              forecast[0].dt
-            )}</h1>
-            <img src="img/${
-              forecast[0].weather[0].icon
-            }.png" class="weatherIcon" alt="${forecast[0].weather[0].main}" />
-            <p class="otherDays">
-              <span class="temp"> ${Math.round(forecast[0].temp.day)}°F </span>
-              <br />
-              <span class="weather"> ${
-                forecast[0].weather[0].description
-              } </span>
-            </p>
-          </div>
-          <div class="tuesday col-3">
-            <h1 class="otherDaysName" id="day-two">${formatDay(
               forecast[1].dt
             )}</h1>
             <img src="img/${
               forecast[1].weather[0].icon
-            }.png" class="weatherIcon" alt="${forecast[2].weather[0].main}" />
+            }.png" class="weatherIcon" alt="${forecast[1].weather[0].main}" />
             <p class="otherDays">
               <span class="temp"> ${Math.round(forecast[1].temp.day)}°F </span>
               <br />
@@ -114,10 +103,8 @@ function getForecast(response) {
               } </span>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="wednesday col-3">
-            <h1 class="otherDaysName" id="day-three">${formatDay(
+          <div class="tuesday col-3">
+            <h1 class="otherDaysName" id="day-two">${formatDay(
               forecast[2].dt
             )}</h1>
             <img src="img/${
@@ -131,8 +118,10 @@ function getForecast(response) {
               } </span>
             </p>
           </div>
-          <div class="thursday col-3">
-            <h1 class="otherDaysName" id="day-four">${formatDay(
+        </div>
+        <div class="row">
+          <div class="wednesday col-3">
+            <h1 class="otherDaysName" id="day-three">${formatDay(
               forecast[3].dt
             )}</h1>
             <img src="img/${
@@ -146,10 +135,8 @@ function getForecast(response) {
               } </span>
             </p>
           </div>
-        </div>
-        <div class="row">
-          <div class="friday col-3">
-            <h1 class="otherDaysName" id="day-five">${formatDay(
+          <div class="thursday col-3">
+            <h1 class="otherDaysName" id="day-four">${formatDay(
               forecast[4].dt
             )}</h1>
             <img src="img/${
@@ -163,8 +150,10 @@ function getForecast(response) {
               } </span>
             </p>
           </div>
-          <div class="saturday col-3">
-            <h1 class="otherDaysName" id="day-six">${formatDay(
+        </div>
+        <div class="row">
+          <div class="friday col-3">
+            <h1 class="otherDaysName" id="day-five">${formatDay(
               forecast[5].dt
             )}</h1>
             <img src="img/${
@@ -175,6 +164,21 @@ function getForecast(response) {
               <br />
               <span class="weather"> ${
                 forecast[5].weather[0].description
+              } </span>
+            </p>
+          </div>
+          <div class="saturday col-3">
+            <h1 class="otherDaysName" id="day-six">${formatDay(
+              forecast[6].dt
+            )}</h1>
+            <img src="img/${
+              forecast[6].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[6].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[6].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[6].weather[0].description
               } </span>
             </p>
           </div>
@@ -204,7 +208,9 @@ function sayLocation(response) {
   mainIcon.setAttribute("src", `img/${response.data.weather[0].icon}.png`);
   mainTemp.innerHTML = `${locationTemp}°`;
   mainWeather.innerHTML = `${locationWeather}`;
-  celciusButton.classList.remove("active");
+  windSpeed.innerHTML = `Wind Speed : ${Math.round(
+    response.data.wind.speed
+  )} mph`;
 }
 function handleLocation(position) {
   let latitude = position.coords.latitude;

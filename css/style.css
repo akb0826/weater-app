@@ -55,10 +55,6 @@ span.temp {
   position: relative;
   left: 30px;
 }
-span.weather {
-  display: block;
-  text-align: right;
-}
 img.mainDayPic {
   width: 70px;
   display: block;
@@ -166,6 +162,12 @@ a.active {
 }
 a.active:hover {
   text-decoration: none;
+}
+.weather {
+  font-family: "Sorrow", monospace;
+  font-size: 20px;
+  display: block;
+  text-align: right;
 }
 #city-input {
   border-radius: 4px;
