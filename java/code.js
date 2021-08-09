@@ -17,18 +17,6 @@ let weekday = weekdays[now.getDay()];
 let date = `Last Updated: ${weekday} ${hour}:${minute}`;
 let dateLocation = document.querySelector("#main-day-time");
 dateLocation.innerHTML = date;
-let dayOne = document.querySelector("#day-one");
-dayOne.innerHTML = "Loading...";
-let dayTwo = document.querySelector("#day-two");
-dayTwo.innerHTML = "Loading...";
-let dayThree = document.querySelector("#day-three");
-dayThree.innerHTML = "Loading...";
-let dayFour = document.querySelector("#day-four");
-dayFour.innerHTML = "Loading...";
-let dayFive = document.querySelector("#day-five");
-dayFive.innerHTML = "Loading...";
-let daySix = document.querySelector("#day-six");
-daySix.innerHTML = "Loading...";
 
 let citySearch = document.querySelector("#search-form");
 let city = document.querySelector("#city-input");
@@ -93,7 +81,119 @@ function nearCities(response) {
   tempFive.innerHTML = Math.round(response.data.list[6].main.temp) + "°F";
 }
 function getForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  let forecastelement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">
+          <div class="monday col-3">
+            <h1 class="otherDaysName" id="day-one">${formatDay(
+              forecast[0].dt
+            )}</h1>
+            <img src="img/${
+              forecast[0].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[0].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[0].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[0].weather[0].description
+              } </span>
+            </p>
+          </div>
+          <div class="tuesday col-3">
+            <h1 class="otherDaysName" id="day-two">${formatDay(
+              forecast[1].dt
+            )}</h1>
+            <img src="img/${
+              forecast[1].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[2].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[1].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[1].weather[0].description
+              } </span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="wednesday col-3">
+            <h1 class="otherDaysName" id="day-three">${formatDay(
+              forecast[2].dt
+            )}</h1>
+            <img src="img/${
+              forecast[2].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[2].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[2].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[2].weather[0].description
+              } </span>
+            </p>
+          </div>
+          <div class="thursday col-3">
+            <h1 class="otherDaysName" id="day-four">${formatDay(
+              forecast[3].dt
+            )}</h1>
+            <img src="img/${
+              forecast[3].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[3].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[3].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[3].weather[0].description
+              } </span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="friday col-3">
+            <h1 class="otherDaysName" id="day-five">${formatDay(
+              forecast[4].dt
+            )}</h1>
+            <img src="img/${
+              forecast[4].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[4].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[4].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[4].weather[0].description
+              } </span>
+            </p>
+          </div>
+          <div class="saturday col-3">
+            <h1 class="otherDaysName" id="day-six">${formatDay(
+              forecast[5].dt
+            )}</h1>
+            <img src="img/${
+              forecast[5].weather[0].icon
+            }.png" class="weatherIcon" alt="${forecast[5].weather[0].main}" />
+            <p class="otherDays">
+              <span class="temp"> ${Math.round(forecast[5].temp.day)}°F </span>
+              <br />
+              <span class="weather"> ${
+                forecast[5].weather[0].description
+              } </span>
+            </p>
+          </div>
+        </div>`;
+  forecastelement.innerHTML = forecastHTML;
+}
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
 }
 function sayLocation(response) {
   fahrenheitTemp = response.data.main.temp;

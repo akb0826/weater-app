@@ -93,12 +93,12 @@ div.monday {
   max-width: 300px;
   padding-bottom: 0px;
 }
-h1.otherDays {
+h1.otherDaysName {
   font-size: 30px;
   font-family: "Sorrow", monospace;
   text-align: center;
 }
-img.partiallyCloudy {
+img.weatherIcon {
   width: 80px;
   display: block;
   margin: 0 auto;
