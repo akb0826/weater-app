@@ -219,34 +219,6 @@ function handleLocation(position) {
 function getLocation() {
   navigator.geolocation.getCurrentPosition(handleLocation);
 }
-function sayCelciusTemp(event) {
-  event.preventDefault();
-  let celciusTemp = (fahrenheitTemp - 32) * (5 / 9);
-  let temperatureElement = document.querySelector("#main-day-temp");
-  if (fahrenheitTemp == null) {
-    temperatureElement.innerHTML = "...";
-  } else {
-    temperatureElement.innerHTML = Math.round(celciusTemp) + "°";
-    fahrenheitButton.classList.remove("active");
-    celciusButton.classList.add("active");
-  }
-}
-function sayFahrenheitTemp(event) {
-  let temperatureElement = document.querySelector("#main-day-temp");
-  if (fahrenheitTemp == null) {
-    temperatureElement.innerHTML = "...";
-  } else {
-    temperatureElement.innerHTML = Math.round(fahrenheitTemp) + "°";
-    celciusButton.classList.remove("active");
-    fahrenheitButton.classList.add("active");
-  }
-}
+
 button.addEventListener("click", getLocation);
 citySearch.addEventListener("submit", sayCity);
-
-let fahrenheitTemp = null;
-
-let celciusButton = document.querySelector("#main-day-temp-c");
-celciusButton.addEventListener("click", sayCelciusTemp);
-let fahrenheitButton = document.querySelector("#main-day-temp-f");
-fahrenheitButton.addEventListener("click", sayFahrenheitTemp);
